@@ -1,0 +1,24 @@
+const clientes = document.getElementById("#clientes");
+
+fetch(".clientes.json")
+  .then((response) => response.json())
+  .then((clientes => {
+    clientes.forEach((clientes) => {
+      let{index,balance, age, name, email, phone} = clientes
+       caja.innerHTML += `
+       <div id="clientes">
+      <div class="">
+        <h3>${name}</h3>
+        <p>Edad:${age}</p>
+        <p>$${balance}</p>
+        <p>Tel:${phone}</p>
+        <p>Email: ${email}</p>
+        <p>${index}</p>
+        <button id="agregar${index}">Seleccionar cliente</button>
+      </div
+      `;
+    });
+  }))
+
+
+  <div id="clientes"></div>

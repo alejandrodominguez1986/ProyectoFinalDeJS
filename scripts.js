@@ -3,7 +3,7 @@ if (document.readyState == "loading") {
 } else {
   compra();
 }
-
+//
 function compra() {
   var removerItemDelCarritoBoton =
     document.getElementsByClassName("btn-danger");
@@ -28,7 +28,7 @@ function compra() {
     .getElementsByClassName("btn-purchase")[0]
     .addEventListener("click", comprarProducto);
 }
-
+// en esta funcion las usamos para darle finalizacion a la compra de todos los productos,llamando a la funcion totaldelacompra para saber cuanto fue el costo total de los productos seleccionados
 function comprarProducto() {
   Swal.fire({
     title: "Gracias por tu compra.",
@@ -50,7 +50,7 @@ function comprarProducto() {
   }
   totalDeLaCompra();
 }
-
+//con esta funcion removeremos el producto en su totalidad, se borran el producto en si sin importar la cantidad de producto seleccionado
 function removerItemDelCarrito(event) {
   var buttonClicked = event.target;
   buttonClicked.parentElement.parentElement.remove();
@@ -71,14 +71,14 @@ function removerItemDelCarrito(event) {
       clearInterval(timerInterval);
     },
   }).then((result) => {
-    /* Read more about handling dismissals below */
+   
     if (result.dismiss === Swal.DismissReason.timer) {
       console.log("I was closed by the timer");
     }
   });
   totalDeLaCompra();
 }
-
+//con esta funcion podemos por medio del input cambiar la canidad de cada producto seleccionado sin la necesidad de tener que sellecionar mas de una vez el mismo producto 
 function cambioDeCantidad(event) {
   var input = event.target;
   if (isNaN(input.value) || input.value <= 0) {
@@ -104,6 +104,7 @@ function agregarItemAlCarrito(nombre, costo, imagenSrc) {
   var carritoItemNames = carritoItems.getElementsByClassName(
     "carrito-item-nombre"
   );
+// cuando ya tenemos el producto seleccionado por medio de un if verificamos que ya este ese producto seleccionado y enviamos un alerta para que el cliente sepa que ya ha seleccionado el producto y que desde su carrito puede cambiar la cantida del producto 
   for (var i = 0; i < carritoItemNames.length; i++) {
     if (carritoItemNames[i].innerText == nombre) {
       let timerInterval;
@@ -131,16 +132,19 @@ function agregarItemAlCarrito(nombre, costo, imagenSrc) {
       return;
     }
   }
+  //creamos por medio del ineerHTML una card donde apareceran todos los productos seleccionados por el cliente 
   var insumosContenido = `
-        <div class="carrito-item carrito-column">
-            <img class="carrito-item-imagen" src="${imagenSrc}" width="100" height="100">
-            <p class="carrito-item-nombre">${nombre}</p>
+        <div class="carrito-item carrito-column card-body carrito-total">
+            <img class="carrito-item-imagen" src="${imagenSrc}" width="90" height="90">
+            <p class="carrito-item-nombre card-tex">${nombre}</p>
         </div>
-        <p class="carrito-costo carrito-column">${costo}</p>
+        <p class="carrito-costo carrito-column card-tex">${costo}</p>
         <div class="carrito-cantidad carrito-column">
-            <input class="carrito-cantidad-input" type="number" value="1">
+            <input class="carrito-cantidad-input "  type="number" value="1"  >
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`;
+
+
   carritoRow.innerHTML = insumosContenido;
   carritoItems.append(carritoRow);
   carritoRow
@@ -170,3 +174,4 @@ function totalDeLaCompra() {
   document.getElementsByClassName("carrito-total-costo")[0].innerText =
     "$" + total;
 }
+
