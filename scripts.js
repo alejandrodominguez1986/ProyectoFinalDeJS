@@ -31,7 +31,7 @@ function compra() {
 // en esta funcion las usamos para darle finalizacion a la compra de todos los productos,llamando a la funcion totaldelacompra para saber cuanto fue el costo total de los productos seleccionados
 function comprarProducto() {
   Swal.fire({
-    title: "Gracias por tu compra.",
+    title: `Gracias por tu compra.`,     
     width: 600,
     padding: "3em",
     color: "#716add",
