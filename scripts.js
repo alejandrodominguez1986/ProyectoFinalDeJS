@@ -3,24 +3,24 @@ if (document.readyState == "loading") {
 } else {
   compra();
 }
-//
+
 function compra() {
-  var removerItemDelCarritoBoton =
+  let removerItemDelCarritoBoton =
     document.getElementsByClassName("btn-danger");
-  for (var i = 0; i < removerItemDelCarritoBoton.length; i++) {
-    var button = removerItemDelCarritoBoton[i];
+  for (let i = 0; i < removerItemDelCarritoBoton.length; i++) {
+    let button = removerItemDelCarritoBoton[i];
     button.addEventListener("click", removerItemDelCarrito);
   }
 
-  var insumosCompra = document.getElementsByClassName("carrito-cantidad-input");
-  for (var i = 0; i < insumosCompra.length; i++) {
-    var input = insumosCompra[i];
+  let insumosCompra = document.getElementsByClassName("carrito-cantidad-input");
+  for (let i = 0; i < insumosCompra.length; i++) {
+    let input = insumosCompra[i];
     input.addEventListener("change", cambioDeCantidad);
   }
 
-  var botoncomprarProducto = document.getElementsByClassName("producto-button");
-  for (var i = 0; i < botoncomprarProducto.length; i++) {
-    var button = botoncomprarProducto[i];
+  let botoncomprarProducto = document.getElementsByClassName("producto-button");
+  for (let i = 0; i < botoncomprarProducto.length; i++) {
+    let button = botoncomprarProducto[i];
     button.addEventListener("click", agregadoAlCarrito);
   }
 
@@ -44,7 +44,7 @@ function comprarProducto() {
         `,
   });
 
-  var carritoItems = document.getElementsByClassName("carrito-items")[0];
+  let carritoItems = document.getElementsByClassName("carrito-items")[0];
   while (carritoItems.hasChildNodes()) {
     carritoItems.removeChild(carritoItems.firstChild);
   }
@@ -52,7 +52,7 @@ function comprarProducto() {
 }
 //con esta funcion removeremos el producto en su totalidad, se borran el producto en si sin importar la cantidad de producto seleccionado
 function removerItemDelCarrito(event) {
-  var buttonClicked = event.target;
+  let buttonClicked = event.target;
   buttonClicked.parentElement.parentElement.remove();
   let timerInterval;
   Swal.fire({
@@ -80,7 +80,7 @@ function removerItemDelCarrito(event) {
 }
 //con esta funcion podemos por medio del input cambiar la canidad de cada producto seleccionado sin la necesidad de tener que sellecionar mas de una vez el mismo producto 
 function cambioDeCantidad(event) {
-  var input = event.target;
+  let input = event.target;
   if (isNaN(input.value) || input.value <= 0) {
     input.value = 1;
   }
@@ -88,24 +88,24 @@ function cambioDeCantidad(event) {
 }
 
 function agregadoAlCarrito(event) {
-  var button = event.target;
-  var shopItem = button.parentElement.parentElement;
-  var nombre = shopItem.getElementsByClassName("producto-nombre")[0].innerText;
-  var costo = shopItem.getElementsByClassName("producto-costo")[0].innerText;
-  var imagenSrc = shopItem.getElementsByClassName("producto-imagen")[0].src;
+  let button = event.target;
+  let shopItem = button.parentElement.parentElement;
+  let nombre = shopItem.getElementsByClassName("producto-nombre")[0].innerText;
+  let costo = shopItem.getElementsByClassName("producto-costo")[0].innerText;
+  let imagenSrc = shopItem.getElementsByClassName("producto-imagen")[0].src;
   agregarItemAlCarrito(nombre, costo, imagenSrc);
   totalDeLaCompra();
 }
 
 function agregarItemAlCarrito(nombre, costo, imagenSrc) {
-  var carritoRow = document.createElement("div");
+  let carritoRow = document.createElement("div");
   carritoRow.classList.add("carrito-row");
-  var carritoItems = document.getElementsByClassName("carrito-items")[0];
-  var carritoItemNames = carritoItems.getElementsByClassName(
+  let carritoItems = document.getElementsByClassName("carrito-items")[0];
+  let carritoItemNames = carritoItems.getElementsByClassName(
     "carrito-item-nombre"
   );
 // cuando ya tenemos el producto seleccionado por medio de un if verificamos que ya este ese producto seleccionado y enviamos un alerta para que el cliente sepa que ya ha seleccionado el producto y que desde su carrito puede cambiar la cantida del producto 
-  for (var i = 0; i < carritoItemNames.length; i++) {
+  for (let i = 0; i < carritoItemNames.length; i++) {
     if (carritoItemNames[i].innerText == nombre) {
       let timerInterval;
       Swal.fire({
@@ -133,7 +133,7 @@ function agregarItemAlCarrito(nombre, costo, imagenSrc) {
     }
   }
   //creamos por medio del ineerHTML una card donde apareceran todos los productos seleccionados por el cliente 
-  var insumosContenido = `
+  let insumosContenido = `
         <div class="carrito-item carrito-column card-body carrito-total">
             <img class="carrito-item-imagen" src="${imagenSrc}" width="90" height="90">
             <p class="carrito-item-nombre card-tex">${nombre}</p>
@@ -156,18 +156,18 @@ function agregarItemAlCarrito(nombre, costo, imagenSrc) {
 }
 
 function totalDeLaCompra() {
-  var carritoItemContainer =
+  let carritoItemContainer =
     document.getElementsByClassName("carrito-items")[0];
-  var carritoRows = carritoItemContainer.getElementsByClassName("carrito-row");
-  var total = 0;
-  for (var i = 0; i < carritoRows.length; i++) {
-    var carritoRow = carritoRows[i];
-    var costoElement = carritoRow.getElementsByClassName("carrito-costo")[0];
-    var quantityElement = carritoRow.getElementsByClassName(
+  let carritoRows = carritoItemContainer.getElementsByClassName("carrito-row");
+  let total = 0;
+  for (let i = 0; i < carritoRows.length; i++) {
+    let carritoRow = carritoRows[i];
+    let costoElement = carritoRow.getElementsByClassName("carrito-costo")[0];
+    let quantityElement = carritoRow.getElementsByClassName(
       "carrito-cantidad-input"
     )[0];
-    var costo = parseFloat(costoElement.innerText.replace("$", ""));
-    var quantity = quantityElement.value;
+    let costo = parseFloat(costoElement.innerText.replace("$", ""));
+    let quantity = quantityElement.value;
     total = total + costo * quantity;
   }
   total = Math.round(total * 100) / 100;
