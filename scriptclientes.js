@@ -1,54 +1,25 @@
-const formCaja = document.querySelector(".formCaja");
-const inputNombre = document.querySelector("#busquedaNombre");
-const inputId = document.querySelector("#busquedaId");
-const caja = document.querySelector(".caja");
-
-const escucharInputs = () => {
-  inputId.oninput = () => {
-    inputNombre.value = "";
-  };
-  inputNombre.oninput = () => {
-    inputId.value = "";
-  };
-};
-const buscarPorId = (id) => {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error);
-        } else {
-          console.log(data);
-          console.log(caja);
-          caja.innerHTML = `<div>
-          <img src="${data.image}">
-          <h4>${data.name}</h4>
-          <p>${data.status}</p>
-          </div>`;
-        }
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
-  };
-  
-  const buscarPorNombre = (nombre) => {
-    fetch(`https://rickandmortyapi.com/api/character/?name=${nombre}`)
-  };
-  
-  const escucharForm = () => {
-    console.log(formCaja);
-    formCaja.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (inputNombre.value === "") {
-        buscarPorId(inputId.value);
-      }
-      if (inputId.value === "") {
-        buscarPorNombre(inputNombre.value);
-      }
+const caja = document.querySelector("#caja");
+fetch("./datos.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((element) => {
+      let{index,balance, age, name, email, phone} = element
+      caja.innerHTML += `
+      <div class="card" id="caja" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Nombre:${name}</h5>
+        <p class="card-text">Edad:${age}</p>
+        <p class="card-text">$${balance}</p>
+        <p class="card-text">Tel:${phone}</p>
+        <p class="card-text">Email: ${email}</p>
+        <p class="card-text">${index}</p>
+        <button id="agregar${index}">Seleccionar cliente</button>
+      </div>
+    </div>
+     `;
     });
-  };
-  
-  escucharInputs();
-  escucharForm();
-  
+    let btns = document.querySelectorAll(".btn");
+    btns.forEach((e) =>
+      e.addEventListener("click", () => console.log("click"))
+    );
+  });
