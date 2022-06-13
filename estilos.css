@@ -26,6 +26,7 @@ body{
     
     
 }
+
 .div-header{
     text-align: center;
     font-size: 60px;
@@ -63,6 +64,19 @@ body{
     color: rgb(0, 0, 0);
 }
 
+#caja{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;    
+    margin: auto;
+    font-family: monospace;
+    color: black;
+}
+.card-body{
+    border: 6px solid rgb(0, 0, 0);
+}
+
 .div-carrito{
     
     border: 6px solid rgb(0, 0, 0);
@@ -87,4 +101,17 @@ body{
     font-size: 12px;
     color: black;
     text-align: center;
+}
+
+.anchor{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 65px;
+    font-weight: 900;
+    font-family: monospace;
+    text-decoration: none;
+    color: black;
+    
 }

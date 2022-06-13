@@ -5,14 +5,14 @@ fetch("./datos.json")
     data.forEach((element) => {
       let{index,balance, age, name, email, phone} = element
       caja.innerHTML += `
-      <div class="card" id="caja" style="width: 18rem;">
-      <div class="card-body">
+      <div class="card  fw-bold" id="caja" style="width: 18rem;">
+      <div class="card-body  card-clientes">
         <h5 class="card-title">Nombre:${name}</h5>
         <p class="card-text">Edad:${age}</p>
         <p class="card-text">$${balance}</p>
         <p class="card-text">Tel:${phone}</p>
         <p class="card-text">Email: ${email}</p>
-        <p class="card-text">${index}</p>
+        <p class="card-text">Numero de usuario:${index}</p>
         <button id="agregar${index}">Seleccionar cliente</button>
       </div>
     </div>
